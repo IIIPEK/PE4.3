@@ -2,3 +2,10 @@ __pycache__/
 .pytest_cache/
 .env
 storage/*
+sound/*
+.vscode/
+.venv/
+.idea/
+*.pyc
+*.pyo
+*.log

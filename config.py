@@ -26,6 +26,8 @@ class Settings:
     storage_dir: str
     eleven_api_key: str
     eleven_model: str
+    keyboard_row_width: int
+    keyboard_files_row_width: int
 
 
 def load_settings() -> Settings:
@@ -37,6 +39,8 @@ def load_settings() -> Settings:
         storage_dir=os.getenv("STORAGE_DIR", "storage"),
         eleven_api_key=os.getenv("ELEVENLABS_API_KEY") or os.getenv("API_KEY", ""),
         eleven_model=os.getenv("ELEVENLABS_MODEL", "eleven_multilingual_v2"),
+        keyboard_row_width=int(os.getenv("KEYBOARD_ROW_WIDTH", "2")),
+        keyboard_files_row_width=int(os.getenv("KEYBOARD_FILES_ROW_WIDTH", "1")),
     )
 
 

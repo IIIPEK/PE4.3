@@ -22,7 +22,7 @@ def register_start_handlers(bot: TeleBot) -> None:
             )
             return
 
-        keyboard = build_voice_keyboard(tuple(voices))
+        keyboard = build_voice_keyboard(tuple(voices), buttons_per_row=settings.keyboard_row_width)
         if voices:
             set_user_voice(message.from_user.id, voices[0])
         bot.send_message(
@@ -38,3 +38,14 @@ def register_start_handlers(bot: TeleBot) -> None:
         set_user_voice(call.from_user.id, voice)
         bot.answer_callback_query(call.id, text=f"Голос «{voice}» выбран")
         bot.send_message(call.message.chat.id, f"Вы выбрали голос: {voice}")
+
+    @bot.message_handler(commands=["help"])
+    def handle_help(message: types.Message) -> None:
+        bot.send_message(
+            message.chat.id,
+            "Доступные команды:\n"
+            "/start — выбор голоса из ElevenLabs\n"
+            "/tts <code>текст</code> — озвучить текст выбранным голосом\n"
+            "/files — список сохраненных файлов с кнопками\n"
+            "/send <code>имя_файла</code> — отправить конкретный файл (или последний без аргумента)",
+        )
